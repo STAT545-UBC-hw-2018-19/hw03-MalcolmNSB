@@ -91,13 +91,13 @@ It is an interesting trend that the difference in GDP per capita between the ric
 
 A final task for GDP per capita will be to look at the spread of GDP per capita within each continent. 
 ```{r}
-#filter gapminder to year 2007, and select continent and gdpPercap columns
-gapminder %>% 
-  filter(year == 2007) %>% 
-  select(continent, gdpPercap) %>% 
 
+gapminder %>% 
+  filter(year == 2007) %>% #filter gapminder to year 2007
+  mutate(gdp = pop*gdpPercap) %>% #add column computing GDP
+  
   #make dot plots of gdpPercap, with log scaling 
-  ggplot( aes(gdpPercap)) +
+  ggplot( aes(gdp)) +
   geom_dotplot() +
   scale_x_log10() +
   facet_wrap(~continent) +
